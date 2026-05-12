@@ -40,6 +40,15 @@ USER node
 # If this occurs, then ensure BuildKit is enabled (`DOCKER_BUILDKIT=1`) so the app dir is correctly created as `node`.
 WORKDIR /app
 
+# Enable Corepack and pre-install Yarn 4 into /opt/corepack (shared, node-owned)
+# so the node user doesn't need to download it at runtime (avoids EACCES)
+USER root
+ENV COREPACK_HOME=/opt/corepack
+RUN corepack enable && \
+    corepack prepare yarn@4.14.1 --activate && \
+    chown -R node:node /opt/corepack
+USER node
+
 # Copy files needed by Yarn
 COPY --chown=node:node .yarn ./.yarn
 COPY --chown=node:node .yarnrc.yml ./
