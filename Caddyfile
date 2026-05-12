@@ -1,0 +1,3 @@
+backstage.c4se.jp {
+    reverse_proxy backstage:7007
+}
