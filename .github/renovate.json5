@@ -1,0 +1,15 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    ":configMigration",
+    "config:recommended",
+  ],
+  dependencyDashboard: true,
+  labels: ["dependencies"],
+  minimumReleaseAge: "3 days",
+  schedule: "after 10am and before 7pm every weekday",
+  timezone: "Asia/Tokyo",
+  vulnerabilityAlerts: {
+    labels: ["dependencies", "security"],
+  },
+}
